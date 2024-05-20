@@ -1,0 +1,60 @@
+<nav
+  class="top-0 absolute z-50 w-full flex flex-wrap items-center justify-between px-2 py-3 navbar-expand-lg"
+>
+  <div
+    class="container px-4 mx-auto flex flex-wrap items-center justify-between"
+  >
+    <div
+      class="w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start"
+    >
+      <a
+        [routerLink]="['/']"
+        class="text-white text-sm font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase"
+      >
+        Notus Angular
+      </a>
+      <button
+        class="cursor-pointer text-xl leading-none px-3 py-1 border border-solid border-transparent rounded bg-transparent block lg:hidden outline-none focus:outline-none"
+        type="button"
+        (click)="setNavbarOpen()"
+      >
+        <i class="text-white fas fa-bars"></i>
+      </button>
+    </div>
+    <div
+      class="lg:flex flex-grow items-center bg-white lg:bg-opacity-0 lg:shadow-none"
+      [ngClass]="{ hidden: !navbarOpen, 'block rounded shadow-lg': navbarOpen }"
+      id="example-navbar-warning"
+    >
+      <ul class="flex flex-col lg:flex-row list-none mr-auto">
+        <li class="flex items-center">
+          <a
+            class="lg:text-white lg:hover:text-blueGray-200 text-blueGray-700 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
+            href="/play"
+          >
+            <i
+              class="lg:text-blueGray-200 text-blueGray-400 far fa-file-alt text-lg leading-lg mr-2"
+            ></i>
+            Juega aqui
+          </a>
+        </li>
+      </ul>
+      <ul class="flex flex-col lg:flex-row list-none lg:ml-auto">
+        <li class="flex items-center">
+          <app-pages-dropdown class="block"></app-pages-dropdown>
+        </li>
+        <li class="flex items-center">
+          <a
+            class="text-white hover:text-blueGray-200 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
+            href="/auth/login" 
+          >
+            <i
+              class="text-blueGray-400 hover:text-blueGray-200 fas fa-sign-in-alt text-lg leading-lg mr-2"
+            ></i>  <!-- El ícono también cambia a blanco con hover a gris claro -->
+            Inicio de sesión
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

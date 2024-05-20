@@ -1,0 +1,1 @@
+declare var ActiveXObject: (type: string) => any;
