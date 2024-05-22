@@ -3,6 +3,7 @@ import { NgModule } from "@angular/core";
 import { HttpClientModule } from '@angular/common/http'; 
 
 import { AppRoutingModule } from "./app-routing.module";
+import { GoogleMapsModule } from '@angular/google-maps';
 import { AppComponent } from "./app.component";
 
 //module
@@ -51,6 +52,8 @@ import { PagesDropdownComponent } from "./components/dropdowns/pages-dropdown/pa
 import { NotificationDropdownComponent } from "./components/dropdowns/notification-dropdown/notification-dropdown.component";
 import { SidebarComponent } from "./components/sidebar/sidebar.component";
 import { UserDropdownComponent } from "./components/dropdowns/user-dropdown/user-dropdown.component";
+import { CardReportsComponent } from './components/cards/card-reports/card-reports.component';
+
 
 
 @NgModule({
@@ -89,8 +92,9 @@ import { UserDropdownComponent } from "./components/dropdowns/user-dropdown/user
     IndexComponent,
     LandingComponent,
     ProfileComponent,
+    CardReportsComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, ReactiveFormsModule, HttpClientModule,  NgSelectModule],
+  imports: [BrowserModule, AppRoutingModule, ReactiveFormsModule, HttpClientModule,  NgSelectModule, GoogleMapsModule],
   providers: [],
   bootstrap: [AppComponent],
 })

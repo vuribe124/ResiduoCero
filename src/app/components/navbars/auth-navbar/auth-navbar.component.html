@@ -11,7 +11,7 @@
         [routerLink]="['/']"
         class="text-white text-sm font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase"
       >
-        Notus Angular
+      <img src="assets/img/Logo.png" alt="Logo" class="h-8">
       </a>
       <button
         class="cursor-pointer text-xl leading-none px-3 py-1 border border-solid border-transparent rounded bg-transparent block lg:hidden outline-none focus:outline-none"
@@ -38,21 +38,28 @@
             Juega aqui
           </a>
         </li>
+        <li class="flex items-center">
+          <a
+            class="lg:text-white lg:hover:text-blueGray-200 text-blueGray-700 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
+            [routerLink]="['/reports']"
+          >
+          Crear reporte
+          </a>
+        </li>
       </ul>
       <ul class="flex flex-col lg:flex-row list-none lg:ml-auto">
         <li class="flex items-center">
           <app-pages-dropdown class="block"></app-pages-dropdown>
         </li>
-        <li class="flex items-center">
-          <a
-            class="text-white hover:text-blueGray-200 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
-            href="/auth/login" 
-          >
-            <i
-              class="text-blueGray-400 hover:text-blueGray-200 fas fa-sign-in-alt text-lg leading-lg mr-2"
-            ></i>  <!-- El ícono también cambia a blanco con hover a gris claro -->
+        <li class="flex items-center" *ngIf="!isAuthenticated">
+          <a class="text-white hover:text-blueGray-200 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
+            href="/auth/login">
+            <i class="text-blueGray-400 hover:text-blueGray-200 fas fa-sign-in-alt text-lg leading-lg mr-2"></i>
             Inicio de sesión
           </a>
+        </li>
+        <li class="flex items-center" *ngIf="isAuthenticated">
+          <app-user-dropdown class="block"></app-user-dropdown>
         </li>
       </ul>
     </div>

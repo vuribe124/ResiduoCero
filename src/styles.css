@@ -1,1 +1,16 @@
-/* You can add global styles to this file, and also import other style files */
+/* Estilos específicos para ng-select */
+.ng-select .ng-dropdown-panel {
+    background-color: white !important; /* Asegura un fondo blanco y sólido */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Añade sombra para mejor visibilidad */
+  }
+  
+  .ng-select .ng-option {
+    color: black; /* Asegura que el texto sea legible */
+    padding: 0.5rem; /* Espaciado adecuado para cada opción */
+  }
+
+
+  google-map {
+    height: 500px; /* Altura del mapa */
+    width: 100%;   /* Ancho del mapa */
+  }

@@ -6,12 +6,24 @@ import { Component, OnInit } from "@angular/core";
 })
 export class AuthNavbarComponent implements OnInit {
   navbarOpen = false;
+  isAuthenticated = false;
+  userName = '';
 
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.checkAuthentication();
+  }
 
   setNavbarOpen() {
     this.navbarOpen = !this.navbarOpen;
+  }
+
+  checkAuthentication() {
+    const userInfo = localStorage.getItem('userInfo');
+    if (userInfo) {
+      this.isAuthenticated = true;
+      this.userName = JSON.parse(userInfo).username; // Asumiendo que el objeto userInfo tiene una propiedad 'username'
+    }
   }
 }
