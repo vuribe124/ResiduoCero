@@ -53,6 +53,7 @@ import { NotificationDropdownComponent } from "./components/dropdowns/notificati
 import { SidebarComponent } from "./components/sidebar/sidebar.component";
 import { UserDropdownComponent } from "./components/dropdowns/user-dropdown/user-dropdown.component";
 import { CardReportsComponent } from './components/cards/card-reports/card-reports.component';
+import { CardSearchReportComponent } from './components/cards/card-search-report/card-search-report.component';
 
 
 
@@ -93,6 +94,7 @@ import { CardReportsComponent } from './components/cards/card-reports/card-repor
     LandingComponent,
     ProfileComponent,
     CardReportsComponent,
+    CardSearchReportComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, ReactiveFormsModule, HttpClientModule,  NgSelectModule, GoogleMapsModule],
   providers: [],

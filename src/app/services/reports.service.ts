@@ -8,9 +8,12 @@ import { Observable } from 'rxjs';
 export class ReportsService {
 
   constructor(private http: HttpClient) { }
-  private apiUrl = 'http://localhost:8080/reports/';
+  private apiUrl = 'http://localhost:8080/reports';
 
   addReport(formData: FormData): Observable<any> {
     return this.http.post(`${this.apiUrl}/addReport`, formData);
+  }
+  fetchReportById(id: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/${id}`);
   }
 }

@@ -20,6 +20,7 @@ import { IndexComponent } from "./views/index/index.component";
 import { LandingComponent } from "./views/landing/landing.component";
 import { ProfileComponent } from "./views/profile/profile.component";
 import { CardReportsComponent} from "./components/cards/card-reports/card-reports.component";
+import { CardSearchReportComponent } from "./components/cards/card-search-report/card-search-report.component";
 
 const routes: Routes = [
   // admin views
@@ -47,7 +48,8 @@ const routes: Routes = [
   // no layout views
   { path: "profile", component: ProfileComponent },
   { path: "landing", component: LandingComponent },
-  { path: "reports", component: CardReportsComponent},
+  { path: "reports/create", component: CardReportsComponent},
+  { path: "reports/status", component: CardSearchReportComponent},
   { path: "", component: IndexComponent },
   { path: "**", redirectTo: "", pathMatch: "full" },
 ];
