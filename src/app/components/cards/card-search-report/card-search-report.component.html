@@ -1,0 +1,173 @@
+<app-auth-navbar></app-auth-navbar>
+<main class="profile-page">
+    <section class="relative block h-500-px">
+        <div class="absolute top-0 w-full h-full bg-center bg-cover" style="
+          background-image: url('https://images.unsplash.com/photo-1499336315816-097655dcfbda?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2710&q=80');
+        ">
+            <span id="blackOverlay" class="w-full h-full absolute opacity-50 bg-black"></span>
+        </div>
+        <div class="top-auto bottom-0 left-0 right-0 w-full absolute pointer-events-none overflow-hidden h-70-px"
+            style="transform: translateZ(0)">
+            <svg class="absolute bottom-0 overflow-hidden" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"
+                version="1.1" viewBox="0 0 2560 100" x="0" y="0">
+                <polygon class="text-blueGray-200 fill-current" points="2560 0 2560 100 0 100"></polygon>
+            </svg>
+        </div>
+    </section>
+    <section class="relative py-16 bg-blueGray-200">
+        <div class="container mx-auto px-4">
+            <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg -mt-64">
+                <div class="text-center bg-blueGray-100">
+                    <div class="container mx-auto p-1 bg-blueGray-100 rounded-lg shadow-lg mb-10">
+                        <div class="rounded-t bg-white mb-0 px-6 py-6">
+                            <div class="text-center flex justify-between">
+                                <h6 class="text-blueGray-700 text-xl font-bold">Reporte de Basura</h6>
+                            </div>
+                        </div>
+                        <div class="container mx-auto p-5">
+                            <form (ngSubmit)="fetchReport()" [formGroup]="radicadoForm" class="w-full max-w-sm">
+                                <div class="md:flex md:items-center mb-6">
+                                    <div class="md:w-2/3">
+                                        <input
+                                            class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+                                            id="radicado" type="text" formControlName="radicado"
+                                            placeholder="Ingrese número de radicado">
+                                        <div *ngIf="radicadoForm.get('radicado').errors?.required && radicadoForm.get('radicado').touched"
+                                            class="text-red-500 text-xs italic">
+                                            El número de radicado es obligatorio.
+                                        </div>
+                                    </div>
+                                    <div class="md:w-1/3">
+                                        <button type="submit" style="background-color: #48bb78; color: white;"
+                                            class="uppercase text-sm px-6 py-3 rounded shadow hover:bg-green-500 focus:outline-none active:bg-green-600 transition duration-150 ease-in-out"
+                                            [disabled]="radicadoForm.invalid">
+                                            Enviar
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+
+                            <!-- Mensaje de error -->
+                            <div *ngIf="errorMessage" class="text-red-500">
+                                {{ errorMessage }}
+                            </div>
+
+                            <!-- Tabla de resultados -->
+                            <div *ngIf="reportData"
+                                class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded bg-white">
+                                <div class="rounded-t mb-0 px-4 py-3 border-0">
+                                    <div class="flex flex-wrap items-center">
+                                        <div class="relative w-full px-4 max-w-full flex-grow flex-1">
+                                            <h3 class="font-semibold text-lg text-blueGray-700">Detalle del Reporte</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="block w-full overflow-x-auto">
+                                    <!-- Projects table -->
+                                    <table class="items-center w-full bg-transparent border-collapse">
+                                        <thead class="thead-light">
+                                            <tr>
+                                                <th
+                                                    class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                                                    Campo
+                                                </th>
+                                                <th
+                                                    class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                                                    Valor
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td
+                                                    class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
+                                                    Descripción
+                                                </td>
+                                                <td
+                                                    class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                                                    {{ reportData.description }}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td
+                                                    class="px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
+                                                    Tipo de Basura
+                                                </td>
+                                                <td
+                                                    class="px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                                                    {{ reportData.wasteType }}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td
+                                                    class="px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
+                                                    Estado
+                                                </td>
+                                                <td
+                                                    class="px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                                                    {{ reportData.status }}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td
+                                                    class="px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
+                                                    Barrio
+                                                </td>
+                                                <td
+                                                    class="px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                                                    {{ reportData.neighborhood }}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td
+                                                    class="px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
+                                                    Dirección
+                                                </td>
+                                                <td
+                                                    class="px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                                                    {{ reportData.address }}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td
+                                                    class="px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
+                                                    Notas de Cómo Llegar
+                                                </td>
+                                                <td
+                                                    class="px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                                                    {{ reportData.directionNotes }}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td
+                                                    class="px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
+                                                    Creado
+                                                </td>
+                                                <td
+                                                    class="px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                                                    {{ reportData.createdAt | date:'medium' }}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td
+                                                    class="px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
+                                                    Actualizado
+                                                </td>
+                                                <td
+                                                    class="px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                                                    {{ reportData.updatedAt | date:'medium' }}
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+<app-footer></app-footer>

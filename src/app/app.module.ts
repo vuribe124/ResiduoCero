@@ -53,6 +53,7 @@ import { SidebarComponent } from "./components/sidebar/sidebar.component";
 import { UserDropdownComponent } from "./components/dropdowns/user-dropdown/user-dropdown.component";
 import { CardReportsComponent } from './components/cards/card-reports/card-reports.component';
 import { ColletionRoutineComponent } from "./views/admin/colletion-routine/colletion-routine.component";
+import { CardSearchReportComponent } from './components/cards/card-search-report/card-search-report.component';
 
 
 
@@ -93,7 +94,8 @@ import { ColletionRoutineComponent } from "./views/admin/colletion-routine/colle
     LandingComponent,
     ProfileComponent,
     CardReportsComponent,
-    ColletionRoutineComponent
+    ColletionRoutineComponent,
+    CardSearchReportComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, ReactiveFormsModule, HttpClientModule,  NgSelectModule],
   providers: [],
