@@ -1,4 +1,4 @@
-export interface colletionRoutine {
+export interface iColletionRoutine {
     id?: number;
     neighborhood?: string;
     startHour?: string;

@@ -1,10 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { barrios } from 'src/app/models/barrios';
-import { colletionRoutine } from 'src/app/models/colletion-routine';
+import { iBarrios } from 'src/app/models/barrios';
+import { iColletionRoutine } from 'src/app/models/colletion-routine';
 import { BarriosService } from 'src/app/services/barrios.service';
 import { ColletionRoutineService } from 'src/app/services/colletion-routine.service';
 import { debounceTime, startWith } from 'rxjs/operators';
+import { iItemsDropdown } from 'src/app/models/items-dropdown';
 
 @Component({
   selector: 'app-colletion-routine',
@@ -16,14 +17,23 @@ export class ColletionRoutineComponent implements OnInit {
   get color(): string {
     return this._color;
   }
-  list: colletionRoutine[] = []
+  list: iColletionRoutine[] = []
+  itemsDropdown: iItemsDropdown[] = [
+    {
+      text: 'Editar'
+    },
+    {
+      text: 'Eliminar'
+    }
+  ]
   showModal: boolean = false
   colletionRoutineForm: FormGroup;
   showBarrios = false;
-  barrios: barrios[] = [];
+  barrios: iBarrios[] = [];
   filteredBarrios = [...this.barrios];
   searchControl: FormControl = new FormControl();
   weekdays: string[] = []
+  titleModal:string = ''
 
   set color(color: string) {
     this._color = color !== "light" && color !== "dark" ? "light" : color;
@@ -31,6 +41,7 @@ export class ColletionRoutineComponent implements OnInit {
   private _color = "light";
   constructor(private fb: FormBuilder, private colletionRoutineSV: ColletionRoutineService, private barriosService: BarriosService) {
     this.colletionRoutineForm = this.fb.group({
+      id: [],
       neighborhood: ['', Validators.required],
       startHour: ['', Validators.required],
       endHour: ['', Validators.required],
@@ -65,16 +76,69 @@ export class ColletionRoutineComponent implements OnInit {
     })
   }
 
+  onGoTo(event:any){
+    switch (event.event) {
+      case 'Editar':
+          this.openModalEdit(event.id)
+        break;
+      case 'Eliminar':
+          this.deleteColletionRoutine(event.id)
+        break;
+    
+      default:
+        break;
+    }
+  }
+
+  deleteColletionRoutine(id:any){
+    this.colletionRoutineSV.delete(id).subscribe(response => {
+      this.getList()
+    })
+  }
+
+  openModalEdit(id:any){
+    this.titleModal = 'Editar rutina de recolección'
+    let index = this.list.findIndex(item => item.id == id)
+    let element = this.list[index]
+    this.colletionRoutineForm.get('id').setValue(element.id)
+    this.selectBarrio({ name: element.neighborhood, value: element.neighborhood })
+    this.colletionRoutineForm.get('startHour').setValue(element.startHour)
+    this.colletionRoutineForm.get('endHour').setValue(element.endHour)
+    this.weekdays = element.weekdays
+    this.showModal = !this.showModal;
+  }
+
   toggleModal() {
+    this.titleModal = 'Crear rutina de recolección'
     this.showModal = !this.showModal;
   }
 
   onSubmit() {
     this.colletionRoutineForm.get('weekdays').setValue(this.weekdays.join(','),  { emitEvent: true })
-    this.colletionRoutineSV.save({...this.colletionRoutineForm.value}).subscribe(response => {
-      this.showModal = !this.showModal;
-      this.getList()
-    })
+    if (this.colletionRoutineForm.valid) {
+      if (this.colletionRoutineForm.value.id) {
+        this.colletionRoutineSV.update({...this.colletionRoutineForm.value}).subscribe(response => {
+          this.showModal = !this.showModal;
+          this.getList()
+          this.colletionRoutineForm.reset()
+        })
+      }else{
+        this.colletionRoutineSV.save({...this.colletionRoutineForm.value}).subscribe(response => {
+          this.showModal = !this.showModal;
+          this.getList()
+          this.colletionRoutineForm.reset()
+        })
+      }
+    }else{
+      this.markAsTouched()
+    }
+  }
+
+  markAsTouched(){
+    this.colletionRoutineForm.get('neighborhood')?.markAsTouched();
+    this.colletionRoutineForm.get('startHour')?.markAsTouched();
+    this.colletionRoutineForm.get('endHour')?.markAsTouched();
+    this.colletionRoutineForm.get('weekdays')?.markAsTouched();
   }
 
   checkedWeekday(event: any, weekday: string){
@@ -86,6 +150,10 @@ export class ColletionRoutineComponent implements OnInit {
           this.weekdays.splice(index, 1);
       }
     }
+  }
+
+  preCheckedWeekday(weekday:string):boolean{
+    return this.weekdays.findIndex(item => item == weekday) != -1
   }
 
   filterBarrios(value: string) {
@@ -100,11 +168,11 @@ export class ColletionRoutineComponent implements OnInit {
 
   selectBarrio(barrio) {
     this.colletionRoutineForm.get('neighborhood').setValue(barrio.value, { emitEvent: true });
-    this.searchControl.setValue(barrio.name, { emitEvent: false }); // Evita que el filtro se dispare
+    this.searchControl.setValue(barrio.name, { emitEvent: false });
     this.filteredBarrios = [];
     this.showBarrios = false;
-    this.colletionRoutineForm.get('neighborhood').markAsTouched();  // Marca el control como 'tocado'
-    this.colletionRoutineForm.get('neighborhood').updateValueAndValidity(); // Actualiza la validación
+    this.colletionRoutineForm.get('neighborhood').markAsTouched();
+    this.colletionRoutineForm.get('neighborhood').updateValueAndValidity();
   }
 
   hideBarrios() {

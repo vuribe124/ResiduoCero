@@ -90,7 +90,7 @@
                             </td>
                             <td
                                 class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-right">
-                                <app-table-dropdown></app-table-dropdown>
+                                <app-table-dropdown [items]="itemsDropdown" [id]="item.id" (goTo)="onGoTo($event)"></app-table-dropdown>
                             </td>
                         </tr>
                     </tbody>
@@ -111,7 +111,7 @@
             <!--header-->
             <div class="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">
                 <h3 class="text-3xl font-semibold">
-                    Crear rutina de recolección
+                    {{titleModal}}
                 </h3>
                 <button
                     class="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
@@ -187,28 +187,28 @@
                             <div class="flex flex-wrap -mx-4">
                                 <div class="w-full lg:w-6/12 px-4">
                                     <div class="flex items-center mb-3">
-                                        <input type="checkbox" (change)="checkedWeekday($event,'lunes')" id="check-monday" value="Lunes"
+                                        <input type="checkbox" [checked]="preCheckedWeekday('Lunes')" (change)="checkedWeekday($event,'Lunes')" id="check-monday" value="Lunes"
                                             class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                                         <label for="check-monday"
                                             class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300 p-1"> Lunes
                                         </label>
                                     </div>
                                     <div class="flex items-center mb-3">
-                                        <input type="checkbox" (change)="checkedWeekday($event,'martes')" id="check-tuesday" value="Martes"
+                                        <input type="checkbox" [checked]="preCheckedWeekday('Martes')" (change)="checkedWeekday($event,'Martes')" id="check-tuesday" value="Martes"
                                             class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                                         <label for="check--tuesday"
                                             class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300 p-1">
                                             Martes </label>
                                     </div>
                                     <div class="flex items-center mb-3">
-                                        <input type="checkbox" (change)="checkedWeekday($event,'míercoles')" id="check-wednesday" value="Míercoles"
+                                        <input type="checkbox" [checked]="preCheckedWeekday('Miércoles')" (change)="checkedWeekday($event,'Miércoles')" id="check-wednesday" value="Miércoles"
                                             class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                                         <label for="check-wednesday"
                                             class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300 p-1">
-                                            Míercoles </label>
+                                            Miércoles </label>
                                     </div>
                                     <div class="flex items-center mb-3">
-                                        <input type="checkbox" (change)="checkedWeekday($event,'jueves')" id="check-thursday" value="Jueves"
+                                        <input type="checkbox" [checked]="preCheckedWeekday('Jueves')" (change)="checkedWeekday($event,'Jueves')" id="check-thursday" value="Jueves"
                                             class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                                         <label for="check-thursday"
                                             class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300 p-1">
@@ -217,21 +217,21 @@
                                 </div>
                                 <div class="w-full lg:w-6/12 px-4">
                                     <div class="flex items-center mb-3">
-                                        <input type="checkbox" (change)="checkedWeekday($event,'viernes')" id="check-friday" value="Viernes"
+                                        <input type="checkbox" [checked]="preCheckedWeekday('Viernes')" (change)="checkedWeekday($event,'Viernes')" id="check-friday" value="Viernes"
                                             class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                                         <label for="check-friday"
                                             class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300 p-1">
                                             Viernes </label>
                                     </div>
                                     <div class="flex items-center mb-3">
-                                        <input type="checkbox" (change)="checkedWeekday($event,'sabado')" id="check-saturday" value="Sabado"
+                                        <input type="checkbox" [checked]="preCheckedWeekday('Sabado')" (change)="checkedWeekday($event,'Sabado')" id="check-saturday" value="Sabado"
                                             class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                                         <label for="check-saturday"
                                             class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300 p-1">
                                             Sabado </label>
                                     </div>
                                     <div class="flex items-center mb-3">
-                                        <input type="checkbox" (change)="checkedWeekday($event,'domingo')" id="check-sunday" value="Domingo"
+                                        <input type="checkbox" [checked]="preCheckedWeekday('Domingo')" (change)="checkedWeekday($event,'Domingo')" id="check-sunday" value="Domingo"
                                             class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                                         <label for="check-sunday"
                                             class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300 p-1">
