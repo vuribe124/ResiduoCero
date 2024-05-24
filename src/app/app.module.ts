@@ -3,7 +3,6 @@ import { NgModule } from "@angular/core";
 import { HttpClientModule } from '@angular/common/http'; 
 
 import { AppRoutingModule } from "./app-routing.module";
-import { GoogleMapsModule } from '@angular/google-maps';
 import { AppComponent } from "./app.component";
 
 //module
@@ -53,6 +52,7 @@ import { NotificationDropdownComponent } from "./components/dropdowns/notificati
 import { SidebarComponent } from "./components/sidebar/sidebar.component";
 import { UserDropdownComponent } from "./components/dropdowns/user-dropdown/user-dropdown.component";
 import { CardReportsComponent } from './components/cards/card-reports/card-reports.component';
+import { ColletionRoutineComponent } from "./views/admin/colletion-routine/colletion-routine.component";
 
 
 
@@ -93,8 +93,9 @@ import { CardReportsComponent } from './components/cards/card-reports/card-repor
     LandingComponent,
     ProfileComponent,
     CardReportsComponent,
+    ColletionRoutineComponent
   ],
-  imports: [BrowserModule, AppRoutingModule, ReactiveFormsModule, HttpClientModule,  NgSelectModule, GoogleMapsModule],
+  imports: [BrowserModule, AppRoutingModule, ReactiveFormsModule, HttpClientModule,  NgSelectModule],
   providers: [],
   bootstrap: [AppComponent],
 })

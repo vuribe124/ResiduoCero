@@ -20,6 +20,7 @@ import { IndexComponent } from "./views/index/index.component";
 import { LandingComponent } from "./views/landing/landing.component";
 import { ProfileComponent } from "./views/profile/profile.component";
 import { CardReportsComponent} from "./components/cards/card-reports/card-reports.component";
+import { ColletionRoutineComponent } from "./views/admin/colletion-routine/colletion-routine.component";
 
 const routes: Routes = [
   // admin views
@@ -31,6 +32,7 @@ const routes: Routes = [
       { path: "settings", component: SettingsComponent },
       { path: "tables", component: TablesComponent },
       { path: "maps", component: MapsComponent },
+      { path: "colletion-routine", component: ColletionRoutineComponent },
       { path: "", redirectTo: "dashboard", pathMatch: "full" },
     ],
   },
