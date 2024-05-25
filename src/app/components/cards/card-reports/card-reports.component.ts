@@ -35,7 +35,6 @@ export class CardReportsComponent implements OnInit {
       this.filteredBarrios=data.barrios
     });
    
-    console.log("AA", this.filteredBarrios)
     this.searchControl.valueChanges
     .pipe(
       debounceTime(300), // Agrega un retardo de 300ms al filtro para mejorar el rendimiento
@@ -132,7 +131,6 @@ export class CardReportsComponent implements OnInit {
     this.searchControl.setValue(barrio.name, { emitEvent: false }); // Evita que el filtro se dispare
     this.filteredBarrios = [];
     this.showBarrios = false;
-    this.reportForm.get('neighborhood').markAsTouched();  // Marca el control como 'tocado'
     this.reportForm.get('neighborhood').updateValueAndValidity(); // Actualiza la validación
   }
   hideBarrios() {

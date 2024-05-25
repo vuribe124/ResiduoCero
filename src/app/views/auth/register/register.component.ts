@@ -4,6 +4,7 @@ import { AuthService } from '../../../services/auth.service';
 import { BarriosService } from '../../../services/barrios.service';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
+import { debounceTime, startWith } from 'rxjs/operators';
 
 @Component({
   selector: "app-register",
@@ -12,6 +13,9 @@ import { Router } from '@angular/router';
 export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
   barrios: any[] = [];
+  showBarrios = false;
+  filteredBarrios = [...this.barrios];
+  searchControl: FormControl = new FormControl();
   constructor(private authService: AuthService,
     private barriosService: BarriosService,
     private router: Router
@@ -30,6 +34,15 @@ export class RegisterComponent implements OnInit {
 
     this.barriosService.getBarrios().subscribe(data => {
       this.barrios = data.barrios;
+    });
+
+    this.searchControl.valueChanges
+    .pipe(
+      debounceTime(300), // Agrega un retardo de 300ms al filtro para mejorar el rendimiento
+      startWith('')
+    )
+    .subscribe(value => {
+      this.filterBarrios(value);
     });
   }
 
@@ -72,5 +85,35 @@ export class RegisterComponent implements OnInit {
         });
     }
   }
+
+  filterBarrios(value: string) {
+    if (!value) {
+      this.filteredBarrios = this.barrios;
+    } else {
+      this.filteredBarrios = this.barrios.filter(barrio =>
+        barrio.name.toLowerCase().includes(value.toLowerCase())
+      );
+    }
+  }
+
+  selectBarrio(barrio: any) {
+    // Actualiza el valor del formulario con el identificador del barrio seleccionado.
+    this.registerForm.get('neighborhood').setValue(barrio.value, { emitEvent: true });
   
+    // Actualiza el input visible con el nombre del barrio seleccionado.
+    this.searchControl.setValue(barrio.name, { emitEvent: false });
+  
+    // Cierra la lista de barrios filtrados y oculta el dropdown.
+    this.filteredBarrios = [];
+    this.showBarrios = false;
+  
+    // Esto es opcional: forzar el refresco de la vista si enfrentas problemas de actualización en la UI.
+    this.registerForm.get('neighborhood').updateValueAndValidity();
+  }
+  
+  hideBarrios() {
+    setTimeout(() => {
+      this.showBarrios = false;
+    }, 100);
+  }
 }

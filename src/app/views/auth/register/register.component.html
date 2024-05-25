@@ -30,15 +30,25 @@
                 placeholder="Contraseña">
             </div>
             <div class="relative w-full mb-3">
-              <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" for="neighborhood">Barrio</label>
-              <ng-select [items]="barrios"
-                         bindLabel="name"
-                         bindValue="value"
-                         formControlName="neighborhood"
-                         class="block w-full px-1 py-2 bg-white text-gray-700 border border-gray-300 rounded-md shadow focus:bg-white"
-                         searchable="true">
-              </ng-select>
-            </div> 
+              <div class="relative mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="neighborhood">
+                  Barrio
+                </label>
+                <input type="text" [formControl]="searchControl"
+                  class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                  placeholder="Buscar barrio" (focus)="showBarrios = true" (blur)="hideBarrios()">
+                <div class="absolute w-full mt-1 rounded-md bg-white shadow-lg z-50" *ngIf="showBarrios">
+                  <ul *ngIf="filteredBarrios.length > 0" class="max-h-60 overflow-auto">
+                    <li *ngFor="let barrio of filteredBarrios.slice(0, 7); let i = index" (mousedown)="$event.preventDefault()" (click)="selectBarrio(barrio)"
+                      class="cursor-pointer hover:bg-gray-100 px-4 py-2">
+                      {{ barrio.name }}
+                    </li>
+                  </ul>
+                  <div *ngIf="filteredBarrios.length === 0 && searchControl.value" class="px-4 py-2 text-gray-500">No se
+                    encontraron barrios</div>
+                </div>
+              </div>
+            </div>
 
             <!-- Campo de dirección -->
             <div class="relative w-full mb-3">
