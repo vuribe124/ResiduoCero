@@ -27,4 +27,18 @@ export class AuthService {
       catchError(error => throwError(error))
     );
   }
+
+  updateUser(userId: number, userData: any): Observable<any> {
+    return this.http.put(`${this.UrlAuth}/users/${userId}`, userData);
+  }
+
+  changeUserPassword(userId: number, newPassword: string): Observable<any> {
+    const passwordData = { password: newPassword };
+    return this.http.put(`${this.UrlAuth}/users/${userId}/password`, passwordData);
+  }
+
+  forgotPassword(email: any): Observable<any> {
+    return this.http.post(`${this.UrlAuth}/send-reset-password-email`, email);
+  }
+
 }

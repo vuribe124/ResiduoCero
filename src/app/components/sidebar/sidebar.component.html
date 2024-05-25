@@ -17,8 +17,8 @@
       [routerLink]="['/']"
       class="md:block text-left md:pb-2 text-blueGray-600 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0"
     >
-      <span class="block sm:hidden"> Tailwind Angular </span>
-      <span class="hidden sm:block"> Notus Angular </span>
+      <span class="block sm:hidden"> Residuo cero </span>
+      <span class="hidden sm:block"> Residuo cero </span>
     </a>
     <!-- User -->
     <ul class="md:hidden items-center flex flex-wrap list-none">
@@ -40,12 +40,10 @@
       >
         <div class="flex flex-wrap">
           <div class="w-6/12">
-            <a
-              [routerLink]="['/']"
-              class="md:block text-left md:pb-2 text-blueGray-600 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0"
-            >
-              Notus Angular
-            </a>
+            <a [routerLink]="['/admin/dashboard']"
+            class="text-white text-sm font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase">
+            <img src="assets/img/Logo.png" alt="Logo" class="h-8">
+          </a>
           </div>
           <div class="w-6/12 flex justify-end">
             <button
@@ -75,7 +73,7 @@
       <h6
         class="md:min-w-full text-blueGray-500 text-xs uppercase font-bold block pt-1 pb-4 no-underline"
       >
-        Admin Layout Pages
+        Administrador
       </h6>
       <!-- Navigation -->
 
@@ -98,7 +96,7 @@
                 adminDashboard.isActive ? 'opacity-75' : 'text-blueGray-300'
               "
             ></i>
-            Dashboard
+            Tablero
           </a>
         </li>
 
@@ -115,16 +113,16 @@
             "
           >
             <i
-              class="fas fa-tools mr-2 text-sm"
+              class="fas fa-user-circle  mr-2 text-sm"
               [ngClass]="
                 adminSettings.isActive ? 'opacity-75' : 'text-blueGray-300'
               "
             ></i>
-            Settings
+            Perfil
           </a>
         </li>
 
-        <li class="items-center">
+       <!--  <li class="items-center">
           <a
             [routerLink]="['/admin/tables']"
             class="text-xs uppercase py-3 font-bold block"
@@ -144,9 +142,9 @@
             ></i>
             Tables
           </a>
-        </li>
+        </li> -->
 
-        <li class="items-center">
+       <!--  <li class="items-center">
           <a
             [routerLink]="['/admin/maps']"
             class="text-xs uppercase py-3 font-bold block"
@@ -166,20 +164,20 @@
             ></i>
             Maps
           </a>
-        </li>
+        </li> -->
       </ul>
 
       <!-- Divider -->
-      <hr class="my-4 md:min-w-full" />
+     <!--  <hr class="my-4 md:min-w-full" /> -->
       <!-- Heading -->
-      <h6
+   <!--    <h6
         class="md:min-w-full text-blueGray-500 text-xs uppercase font-bold block pt-1 pb-4 no-underline"
       >
         Auth Layout Pages
-      </h6>
+      </h6> -->
       <!-- Navigation -->
 
-      <ul class="md:flex-col md:min-w-full flex flex-col list-none md:mb-4">
+     <!--  <ul class="md:flex-col md:min-w-full flex flex-col list-none md:mb-4">
         <li class="items-center">
           <a
             [routerLink]="['/auth/login']"
@@ -200,18 +198,18 @@
           </a>
         </li>
       </ul>
-
+ -->
       <!-- Divider -->
-      <hr class="my-4 md:min-w-full" />
+     <!--  <hr class="my-4 md:min-w-full" /> -->
       <!-- Heading -->
-      <h6
+     <!--  <h6
         class="md:min-w-full text-blueGray-500 text-xs uppercase font-bold block pt-1 pb-4 no-underline"
       >
         No Layout Pages
-      </h6>
+      </h6> -->
       <!-- Navigation -->
 
-      <ul class="md:flex-col md:min-w-full flex flex-col list-none md:mb-4">
+    <!--   <ul class="md:flex-col md:min-w-full flex flex-col list-none md:mb-4">
         <li class="items-center">
           <a
             [routerLink]="['/landing']"
@@ -231,16 +229,16 @@
             Profile Page
           </a>
         </li>
-      </ul>
+      </ul> -->
 
       <!-- Divider -->
-      <hr class="my-4 md:min-w-full" />
+   <!--    <hr class="my-4 md:min-w-full" /> -->
       <!-- Heading -->
-      <h6
+      <!-- <h6
         class="md:min-w-full text-blueGray-500 text-xs uppercase font-bold block pt-1 pb-4 no-underline"
       >
         Documentation
-      </h6>
+      </h6> -->
     </div>
   </div>
 </nav>

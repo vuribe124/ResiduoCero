@@ -1,4 +1,5 @@
 import { Component, AfterViewInit, ViewChild, ElementRef } from "@angular/core";
+import { Router } from "@angular/router";
 import { createPopper } from "@popperjs/core";
 
 @Component({
@@ -10,6 +11,7 @@ export class NotificationDropdownComponent implements AfterViewInit {
   @ViewChild("btnDropdownRef", { static: false }) btnDropdownRef: ElementRef;
   @ViewChild("popoverDropdownRef", { static: false })
   popoverDropdownRef: ElementRef;
+  constructor(private router: Router) {} 
   ngAfterViewInit() {
     createPopper(
       this.btnDropdownRef.nativeElement,
@@ -26,5 +28,15 @@ export class NotificationDropdownComponent implements AfterViewInit {
     } else {
       this.dropdownPopoverShow = true;
     }
+  }
+
+  logout() {
+    // Remover los items del localStorage
+    localStorage.removeItem('userInfo');
+    localStorage.removeItem('userEmail');
+    localStorage.removeItem('jwtToken');
+
+    // Redirigir al usuario a la página de inicio de sesión o la página principal
+    this.router.navigate(['/login']); // Asegúrate de que la ruta es correcta
   }
 }

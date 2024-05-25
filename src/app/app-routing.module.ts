@@ -21,6 +21,8 @@ import { LandingComponent } from "./views/landing/landing.component";
 import { ProfileComponent } from "./views/profile/profile.component";
 import { CardReportsComponent} from "./components/cards/card-reports/card-reports.component";
 import { CardSearchReportComponent } from "./components/cards/card-search-report/card-search-report.component";
+import { GameComponent } from "./components/game/game.component";
+import { ResetPasswordComponent } from "./views/auth/reset-password/reset-password.component";
 
 const routes: Routes = [
   // admin views
@@ -42,6 +44,7 @@ const routes: Routes = [
     children: [
       { path: "login", component: LoginComponent },
       { path: "register", component: RegisterComponent },
+      { path: 'reset-password', component: ResetPasswordComponent },
       { path: "", redirectTo: "login", pathMatch: "full" },
     ],
   },
@@ -50,6 +53,7 @@ const routes: Routes = [
   { path: "landing", component: LandingComponent },
   { path: "reports/create", component: CardReportsComponent},
   { path: "reports/status", component: CardSearchReportComponent},
+  { path: "game", component: GameComponent},
   { path: "", component: IndexComponent },
   { path: "**", redirectTo: "", pathMatch: "full" },
 ];

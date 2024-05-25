@@ -25,6 +25,7 @@ export class AuthNavbarComponent implements OnInit {
 
   checkAuthentication() {
     const userInfo = localStorage.getItem('userInfo');
+    console.log("ajaj", userInfo)
     if (userInfo) {
       this.isAuthenticated = true;
       this.userName = JSON.parse(userInfo).username; // Asumiendo que el objeto userInfo tiene una propiedad 'username'

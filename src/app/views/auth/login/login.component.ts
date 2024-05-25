@@ -2,6 +2,7 @@ import { Component,OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from '../../../services/auth.service'
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: "app-login",
@@ -9,6 +10,8 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit  {
   loginForm: FormGroup;
+  forgotPasswordForm: FormGroup;
+  showForgotPasswordForm: boolean = false;
   constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required]],
@@ -22,6 +25,10 @@ export class LoginComponent implements OnInit  {
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]],
       rememberMe: [false]
+    });
+
+    this.forgotPasswordForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]]
     });
   
     // Check if user data is saved in localStorage
@@ -49,10 +56,31 @@ export class LoginComponent implements OnInit  {
           this.router.navigate(['/admin/dashboard']); // Navega a la página principal o dashboard
         },
         error: (error) => {
+          Swal.fire('Error', 'Error al iniciar sesión verifique el usuario o la contraseña.', 'error');
           console.error('Login failed', error);
         }
       });
     }
   }
+
+  onForgotPasswordSubmit() {
+    if (this.forgotPasswordForm.valid) {
+      this.authService.forgotPassword(this.forgotPasswordForm.value).subscribe({
+        next: (response) => {
+          Swal.fire('Éxito', 'Se ha enviado un enlace para restablecer su contraseña a su correo electrónico.', 'success');
+          this.showForgotPasswordForm = false;
+          this.forgotPasswordForm.reset()
+        },
+        error: (error) => {
+          console.error('Error al solicitar restablecimiento de contraseña', error);
+          Swal.fire('Error', 'Error al solicitar restablecimiento de contraseña: ' + error.error.message, 'error');
+        }
+      });
+    } else {
+      Swal.fire('Validación', 'Por favor, introduzca un correo electrónico válido.', 'info');
+    } 
+  }
+
+  
 }
 

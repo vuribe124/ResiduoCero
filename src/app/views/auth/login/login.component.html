@@ -1,68 +1,41 @@
 <div class="container mx-auto px-4 h-full">
   <div class="flex content-center items-center justify-center h-full">
     <div class="w-full lg:w-4/12 px-4">
-      <div
-        class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-200 border-0"
-      >
+      <!-- Formulario de inicio de sesión -->
+      <div *ngIf="!showForgotPasswordForm" class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-200 border-0">
         <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
           <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
             <div class="relative w-full mb-3 mt-6">
-              <label
-                class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                htmlFor="grid-password"
-              >
+              <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
                 CORREO
               </label>
-              <input
-                type="email"
-                class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                placeholder="Correo"
-                formControlName="email"
-              />
+              <input type="email" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" placeholder="Correo" formControlName="email" />
             </div>
-
             <div class="relative w-full mb-3">
-              <label
-                class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                htmlFor="grid-password"
-              >
+              <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
                 Contraseña
               </label>
-              <input
-                type="password"
-                class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                placeholder="Contraseña"
-                formControlName="password"
-              />
+              <input type="password" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" placeholder="Contraseña" formControlName="password" />
             </div>
             <div>
               <label class="inline-flex items-center cursor-pointer">
-                <input
-                  id="customCheckLogin"
-                  type="checkbox"
-                  formControlName="rememberMe"
-                  class="form-checkbox border-0 text-blueGray-700 ml-1 w-5 h-5 ease-linear transition-all duration-150 rounded"
-                />
-                <span class="ml-2 text-sm font-semibold text-blueGray-600">
-                  Recordarme
-                </span>
+                <input id="customCheckLogin" type="checkbox" formControlName="rememberMe" class="form-checkbox border-0 text-blueGray-700 ml-1 w-5 h-5 ease-linear transition-all duration-150 rounded" />
+                <span class="ml-2 text-sm font-semibold text-blueGray-600">Recordarme</span>
               </label>
             </div>
-
             <div class="text-center mt-6">
-              <button
-                class="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
-                type="submit"
-              >
-              Iniciar sesión
+              <button class="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150" type="submit">
+                Iniciar sesión
               </button>
             </div>
           </form>
         </div>
       </div>
-      <div class="flex flex-wrap mt-6 relative">
+      
+      <!-- Enlaces de Olvido de Contraseña y Crear Cuenta -->
+      <div *ngIf="!showForgotPasswordForm" class="flex flex-wrap mt-6 relative">
         <div class="w-1/2">
-          <a href="javascript:void(0)" class="text-blueGray-200">
+          <a href="javascript:void(0)" class="text-blueGray-200" (click)="showForgotPasswordForm = true">
             <small>¿Has olvidado tu contraseña?</small>
           </a>
         </div>
@@ -71,6 +44,32 @@
             <small>Crear una nueva cuenta</small>
           </a>
         </div>
+      </div>
+
+      <!-- Formulario de recuperación de contraseña -->
+      <div *ngIf="showForgotPasswordForm" class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-200 border-0">
+        <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
+          <form [formGroup]="forgotPasswordForm" (ngSubmit)="onForgotPasswordSubmit()" class="space-y-4">
+            <div class="relative w-full mb-3 mt-6">
+              <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="forgot-password-email">
+                Ingrese su correo 
+              </label>
+              <input type="email" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" placeholder="Correo" formControlName="email" />
+            </div>
+            <div class="text-center mt-6">
+              <button type="submit" class="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150">
+                Enviar
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div *ngIf="showForgotPasswordForm" class="flex flex-wrap mt-6 relative">
+        <div class="w-1/2">
+        <a href="javascript:void(0)" class="text-blueGray-200" (click)="showForgotPasswordForm = false">
+          <small> <- Volver al inicio de sesión</small>
+        </a>
+      </div>
       </div>
     </div>
   </div>

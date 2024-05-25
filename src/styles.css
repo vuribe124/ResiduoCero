@@ -14,3 +14,8 @@
     height: 500px; /* Altura del mapa */
     width: 100%;   /* Ancho del mapa */
   }
+  @media (max-width: 768px) {
+    .bg-cover {
+        background-image: url('assets/img/banner_principal_mobile.png'); /* Una versión optimizada para móviles */
+    }
+}
