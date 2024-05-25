@@ -11,6 +11,7 @@ export class CardSearchReportComponent implements OnInit {
   radicadoForm: FormGroup;
   reportData: any = null;
   errorMessage: string = '';
+  private apiUrl = 'http://localhost:8080/reports/imagen/';
   constructor(private fb: FormBuilder, private reportService: ReportsService) { 
     this.radicadoForm = this.fb.group({
       radicado: ['', Validators.required]
@@ -25,7 +26,8 @@ export class CardSearchReportComponent implements OnInit {
       const radicado = this.radicadoForm.get('radicado').value;
       this.reportService.fetchReportById(radicado).subscribe(
         response => {
-          this.reportData = response;
+          this.reportData = {...response, photoUrls: response.photoUrls.split(',').map(item => this.apiUrl+item.replace('\"uploads\\\\','').replace("\"",'').replace(']','').replace('[',''))};
+          console.log(this.reportData)
           this.errorMessage = '';
         },
         error => {

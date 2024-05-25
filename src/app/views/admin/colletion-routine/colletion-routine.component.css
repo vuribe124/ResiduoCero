@@ -1,0 +1,37 @@
+.modal {
+    transition: opacity 0.2s ease;
+}
+
+.modal-bg {
+    transition: opacity 0.2s ease;
+}
+
+.modal:target {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal:target .modal-bg {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal-bg {
+    z-index: 0;
+    position: fixed;
+    top: -200px;
+    right: 0px;
+    bottom: 0;
+    left: -500px;
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 500%;
+    height: 200%;
+}
+
+.modal {
+    z-index: 10000;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

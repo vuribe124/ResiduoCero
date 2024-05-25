@@ -20,9 +20,11 @@ import { IndexComponent } from "./views/index/index.component";
 import { LandingComponent } from "./views/landing/landing.component";
 import { ProfileComponent } from "./views/profile/profile.component";
 import { CardReportsComponent} from "./components/cards/card-reports/card-reports.component";
+import { ColletionRoutineComponent } from "./views/admin/colletion-routine/colletion-routine.component";
 import { CardSearchReportComponent } from "./components/cards/card-search-report/card-search-report.component";
 import { GameComponent } from "./components/game/game.component";
 import { ResetPasswordComponent } from "./views/auth/reset-password/reset-password.component";
+import { CanlendarComponent } from "./views/canlendar/canlendar.component";
 
 const routes: Routes = [
   // admin views
@@ -34,6 +36,7 @@ const routes: Routes = [
       { path: "settings", component: SettingsComponent },
       { path: "tables", component: TablesComponent },
       { path: "maps", component: MapsComponent },
+      { path: "colletion-routine", component: ColletionRoutineComponent },
       { path: "", redirectTo: "dashboard", pathMatch: "full" },
     ],
   },
@@ -51,6 +54,7 @@ const routes: Routes = [
   // no layout views
   { path: "profile", component: ProfileComponent },
   { path: "landing", component: LandingComponent },
+  { path: "calendar", component: CanlendarComponent },
   { path: "reports/create", component: CardReportsComponent},
   { path: "reports/status", component: CardSearchReportComponent},
   { path: "game", component: GameComponent},
