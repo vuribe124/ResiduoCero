@@ -54,6 +54,7 @@ import { UserDropdownComponent } from "./components/dropdowns/user-dropdown/user
 import { CardReportsComponent } from './components/cards/card-reports/card-reports.component';
 import { ColletionRoutineComponent } from "./views/admin/colletion-routine/colletion-routine.component";
 import { CardSearchReportComponent } from './components/cards/card-search-report/card-search-report.component';
+import { CanlendarComponent } from './views/canlendar/canlendar.component';
 
 
 
@@ -96,6 +97,7 @@ import { CardSearchReportComponent } from './components/cards/card-search-report
     CardReportsComponent,
     ColletionRoutineComponent,
     CardSearchReportComponent,
+    CanlendarComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, ReactiveFormsModule, HttpClientModule,  NgSelectModule],
   providers: [],

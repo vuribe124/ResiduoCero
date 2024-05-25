@@ -9,21 +9,25 @@ import { iColletionRoutine } from '../models/colletion-routine';
 export class ColletionRoutineService {
 
   constructor(private http: HttpClient) { }
-  private apiUrl = 'http://localhost:8080/colletion-routine/';
+  private apiUrl = 'http://localhost:8080/colletion-routine';
 
   list(): Observable<any> {
     return this.http.get(`${this.apiUrl}`);
   }
   
   save(paramenter:iColletionRoutine): Observable<any> {
-    return this.http.post(`${this.apiUrl}add`,paramenter);
+    return this.http.post(`${this.apiUrl}/add`,paramenter);
   }
   
   update(paramenter:iColletionRoutine): Observable<any> {
-    return this.http.post(`${this.apiUrl}update/${paramenter.id}`,paramenter);
+    return this.http.post(`${this.apiUrl}/update/${paramenter.id}`,paramenter);
   }
   
   delete(id:any): Observable<any> {
-    return this.http.delete(`${this.apiUrl}delete/${id}`);
+    return this.http.delete(`${this.apiUrl}/delete/${id}`);
+  }
+  
+  getByNeighborhood(paramenter:any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/get-by-neighborhood`,paramenter);
   }
 }
