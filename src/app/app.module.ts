@@ -3,7 +3,7 @@ import { NgModule } from "@angular/core";
 import { HttpClientModule } from '@angular/common/http'; 
 
 import { AppRoutingModule } from "./app-routing.module";
-import { GoogleMapsModule } from '@angular/google-maps';
+// import { GoogleMapsModule } from '@angular/google-maps';
 import { AppComponent } from "./app.component";
 
 //module
@@ -96,7 +96,7 @@ import { CardSearchReportComponent } from './components/cards/card-search-report
     CardReportsComponent,
     CardSearchReportComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, ReactiveFormsModule, HttpClientModule,  NgSelectModule, GoogleMapsModule],
+  imports: [BrowserModule, AppRoutingModule, ReactiveFormsModule, HttpClientModule,  NgSelectModule],
   providers: [],
   bootstrap: [AppComponent],
 })
