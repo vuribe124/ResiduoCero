@@ -8,6 +8,7 @@ import { catchError, map } from 'rxjs/operators';
 export class AuthService {
 
   private UrlAuth = 'http://localhost:8080/auth';
+  private Url = 'http://localhost:8080';
 
   constructor(private http: HttpClient) { }
 
@@ -39,6 +40,11 @@ export class AuthService {
 
   forgotPassword(email: any): Observable<any> {
     return this.http.post(`${this.UrlAuth}/send-reset-password-email`, email);
+  }
+
+  
+  sendContactMessage(contactData: any): Observable<any> {
+    return this.http.post(`${this.Url}send-email-contact`, contactData);
   }
 
 }
