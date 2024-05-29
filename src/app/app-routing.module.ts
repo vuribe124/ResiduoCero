@@ -25,6 +25,7 @@ import { CardSearchReportComponent } from "./components/cards/card-search-report
 import { GameComponent } from "./components/game/game.component";
 import { ResetPasswordComponent } from "./views/auth/reset-password/reset-password.component";
 import { CanlendarComponent } from "./views/canlendar/canlendar.component";
+import { ReportsComponent } from "./views/admin/reports/reports.component";
 
 const routes: Routes = [
   // admin views
@@ -37,6 +38,7 @@ const routes: Routes = [
       { path: "tables", component: TablesComponent },
       { path: "maps", component: MapsComponent },
       { path: "colletion-routine", component: ColletionRoutineComponent },
+      { path: "reports", component: ReportsComponent },
       { path: "", redirectTo: "dashboard", pathMatch: "full" },
     ],
   },

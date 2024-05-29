@@ -27,7 +27,6 @@ export class CardSearchReportComponent implements OnInit {
       this.reportService.fetchReportById(radicado).subscribe(
         response => {
           this.reportData = {...response, photoUrls: response.photoUrls.split(',').map(item => this.apiUrl+item.replace('\"uploads\\\\','').replace("\"",'').replace(']','').replace('[',''))};
-          console.log(this.reportData)
           this.errorMessage = '';
         },
         error => {

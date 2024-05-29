@@ -137,7 +137,7 @@
                                 <div class="absolute w-full mt-1 rounded-md bg-white shadow-lg z-50"
                                     *ngIf="showBarrios">
                                     <ul *ngIf="filteredBarrios.length > 0" class="max-h-60 overflow-auto">
-                                        <li *ngFor="let barrio of filteredBarrios.slice(0, 7); let i = index"
+                                        <li *ngFor="let barrio of filteredBarrios.slice(0, 7); let i = index" (mousedown)="$event.preventDefault()" 
                                             (click)="selectBarrio(barrio)"
                                             class="cursor-pointer hover:bg-gray-100 px-4 py-2">
                                             {{ barrio.name }}

@@ -7,6 +7,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "server": "npm start --host 192.168.1.14 --port 4200",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -23,6 +24,7 @@
     "@angular/platform-browser": "11.2.5",
     "@angular/platform-browser-dynamic": "11.2.5",
     "@angular/router": "11.2.5",
+    "@angular/service-worker": "11.2.5",
     "@fortawesome/fontawesome-free": "5.15.3",
     "@ng-select/ng-select": "^5.0.0",
     "@popperjs/core": "2.9.1",

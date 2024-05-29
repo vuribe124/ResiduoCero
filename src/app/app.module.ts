@@ -57,6 +57,9 @@ import { CardSearchReportComponent } from './components/cards/card-search-report
 import { GameComponent } from './components/game/game.component';
 import { ResetPasswordComponent } from './views/auth/reset-password/reset-password.component';
 import { CanlendarComponent } from './views/canlendar/canlendar.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
+import { ReportsComponent } from './views/admin/reports/reports.component';
 
 
 
@@ -102,8 +105,14 @@ import { CanlendarComponent } from './views/canlendar/canlendar.component';
     GameComponent,
     ResetPasswordComponent,
     CanlendarComponent,
+    ReportsComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, ReactiveFormsModule, HttpClientModule,  NgSelectModule],
+  imports: [BrowserModule, AppRoutingModule, ReactiveFormsModule, HttpClientModule,  NgSelectModule, ServiceWorkerModule.register('ngsw-worker.js', {
+  enabled: environment.production,
+  // Register the ServiceWorker as soon as the app is stable
+  // or after 30 seconds (whichever comes first).
+  registrationStrategy: 'registerWhenStable:30000'
+})],
   providers: [],
   bootstrap: [AppComponent],
 })

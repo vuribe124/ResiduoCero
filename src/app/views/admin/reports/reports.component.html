@@ -1,0 +1,160 @@
+<div class="flex flex-wrap mt-4">
+    <div class="w-full mb-12 px-4">
+        <div class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded"
+            [ngClass]="color === 'light' ? 'bg-white' : 'bg-blue-900 text-white'">
+            <div class="rounded-t mb-0 px-4 py-3 border-0">
+                <div class="flex flex-wrap items-center">
+                    <div class="relative w-full px-4 max-w-full flex-grow flex-1">
+                        <h3 class="font-semibold text-lg"
+                            [ngClass]="color === 'light' ? 'text-blueGray-700' : 'text-white'">
+                            Lista de reportes de residuos
+                        </h3>
+                    </div>
+                </div>
+            </div>
+            <div class="block w-full overflow-x-auto">
+                <!-- Projects table -->
+                <table class="items-center w-full bg-transparent border-collapse">
+                    <thead>
+                        <tr>
+                            <th class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
+                                [ngClass]="
+          color === 'light'
+            ? 'bg-blueGray-50 text-blueGray-500 border-blueGray-100'
+            : 'bg-blue-800 text-blue-300 border-blue-700'
+        ">
+                                Acciones
+                            </th>
+                            <th class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
+                                [ngClass]="
+              color === 'light'
+                ? 'bg-blueGray-50 text-blueGray-500 border-blueGray-100'
+                : 'bg-blue-800 text-blue-300 border-blue-700'
+            ">
+                                ID
+                            </th>
+                            <th class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
+                                [ngClass]="color === 'light' ? 'bg-blueGray-50 text-blueGray-500 border-blueGray-100' : 'bg-blue-800 text-blue-300 border-blue-700'">
+                                Estado
+                            </th>
+                            <th class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
+                                [ngClass]="
+              color === 'light'
+                ? 'bg-blueGray-50 text-blueGray-500 border-blueGray-100'
+                : 'bg-blue-800 text-blue-300 border-blue-700'
+            ">
+                                Fecha
+                            </th>
+                            <th class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
+                                [ngClass]="
+              color === 'light'
+                ? 'bg-blueGray-50 text-blueGray-500 border-blueGray-100'
+                : 'bg-blue-800 text-blue-300 border-blue-700'
+            ">
+                                Tipo de Residuo
+                            </th>
+                            <th class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
+                                [ngClass]="
+              color === 'light'
+                ? 'bg-blueGray-50 text-blueGray-500 border-blueGray-100'
+                : 'bg-blue-800 text-blue-300 border-blue-700'
+            ">
+                                Descripción
+                            </th>
+                            <th class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
+                                [ngClass]="
+              color === 'light'
+                ? 'bg-blueGray-50 text-blueGray-500 border-blueGray-100'
+                : 'bg-blue-800 text-blue-300 border-blue-700'
+            ">
+                                Barrio
+                            </th>
+                            <th class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
+                                [ngClass]="
+              color === 'light'
+                ? 'bg-blueGray-50 text-blueGray-500 border-blueGray-100'
+                : 'bg-blue-800 text-blue-300 border-blue-700'
+            ">
+                                Dirección
+                            </th>
+                            <th class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
+                                [ngClass]="
+              color === 'light'
+                ? 'bg-blueGray-50 text-blueGray-500 border-blueGray-100'
+                : 'bg-blue-800 text-blue-300 border-blue-700'
+            ">
+                                Notas
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let report of reportList">
+                            <td
+                                class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
+                                <button class="text-blue-500 hover:text-blue-700 focus:outline-none">
+                                    <i class="fas fa-eye" (click)="viewReportDetails(report)"></i>
+                                </button>
+                            </td>
+                            <td
+                                class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
+                                {{ report.id }}
+                            </td>
+                            <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                                <select
+                                  (change)="updateReportStatus(report.id, $event.target.value)"
+                                  class="block text-sm text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
+                                >
+                                  <option [selected]="report.status === 'Reportado'" value="Reportado">Reportado</option>
+                                  <option [selected]="report.status === 'En Proceso'" value="En Proceso">En Proceso</option>
+                                  <option [selected]="report.status === 'Resuelto'" value="Resuelto">Resuelto</option>
+                                  <option [selected]="report.status === 'Archivado'" value="Archivado">Archivado</option>
+                                </select>
+                              </td>
+                            <td
+                                class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                                {{ report.createdAt | date: 'short' }}
+                            </td>
+                            <td
+                                class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                                {{ report.wasteType }}
+                            </td>
+                            <td
+                                class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                                {{ report.description }}
+                            </td>
+                            <td
+                                class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                                {{ report.neighborhood }}
+                            </td>
+                            <td
+                                class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                                {{ report.address }}
+                            </td>
+                            <td
+                                class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                                {{ report.directionNotes }}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="showModal" class="modal-overlay">
+    <div class="modal-content">
+        <div class="modal-close" (click)="toggleModal()">&times;</div>
+        <h3 class="text-2xl font-semibold mb-4">Imágenes</h3>
+        <div class="flex flex-wrap justify-center gap-4">
+            <ng-container *ngFor="let image of currentReport.photoUrls">
+                <img [src]="image" alt="Report Image" class="max-w-xs max-h-xs shadow-md m-2 rounded-lg">
+            </ng-container>
+        </div>
+        <div class="flex justify-end mt-4">
+            <button (click)="toggleModal()" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                Cerrar
+            </button>
+        </div>
+    </div>
+</div>
